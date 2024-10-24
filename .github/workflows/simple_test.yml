@@ -16,6 +16,8 @@ jobs:
           sleep 15
           echo Goodbye!
   build:
+    needs: pre-build
+    
     runs-on:
       - DT
     steps:
@@ -28,6 +30,8 @@ jobs:
           echo Ok!
 
   post-build:
+    needs: build
+    
     runs-on:
       - DT
     steps:
