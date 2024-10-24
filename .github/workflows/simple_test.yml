@@ -4,19 +4,39 @@ on:
   workflow_dispatch:
 
 jobs:
+  pre-build:
+    runs-on:
+      -DT
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run a one-line script
+        run: |
+          echo this is the pre build!
+          sleep 15
+          echo Goodbye!
   build:
     runs-on:
-      - self-hosted
       - DT
     steps:
       - uses: actions/checkout@v2
 
       - name: Run a one-line script
         run: |
-          echo Hello,world!
+          echo this is the build!
           sleep 15
-          echo Goodbye!
+          echo Ok!
 
-      - name: Run a multi-line script
+  post-build:
+    runs-on:
+      - DT
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run a one-line script
         run: |
-          echo "${{ github.workspace }}"
+          echo this is the post-build!
+          sleep 15
+          echo we are done!
+
+     
