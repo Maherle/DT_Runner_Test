@@ -1,0 +1,49 @@
+name: git hosted
+
+on:
+  workflow_dispatch:
+
+jobs:
+  pre-build:
+    runs-on:
+      - ubuntu-latest
+      - DT
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run a one-line script
+        run: |
+          echo this is the pre build!
+          sleep 15
+          echo Goodbye!
+  build:
+    needs: pre-build
+    
+    runs-on:
+      - windows-latest
+      - DT
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run a one-line script
+        run: |
+          echo this is the build!
+          sleep 15
+          echo Ok!
+
+  post-build:
+    needs: build
+    
+    runs-on:
+      - macos-latest
+      - DT
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run a one-line script
+        run: |
+          echo this is the post-build!
+          sleep 15
+          echo we are done!
+
+     
