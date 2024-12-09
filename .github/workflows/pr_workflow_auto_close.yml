@@ -1,0 +1,33 @@
+name: PR Workflow with Auto-Close
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  build-and-close:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Run tests
+      run: |
+        echo "Running tests on pull request..."
+
+    - name: Close Pull Request
+      if: always() # Ensures this runs even if previous steps fail
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        PR_NUMBER=$(jq -r '.pull_request.number' < $GITHUB_EVENT_PATH)
+        echo "Closing Pull Request #$PR_NUMBER"
+        curl -X PATCH \
+          -H "Authorization: token $GITHUB_TOKEN" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUMBER \
+          -d '{"state":"closed"}'
