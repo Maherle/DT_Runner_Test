@@ -6,7 +6,10 @@ on:
       - opened
       - reopened
       - synchronize
-
+      
+permissions:
+  pull-requests: write
+  
 jobs:
   build-and-close:
     runs-on: ubuntu-latest
