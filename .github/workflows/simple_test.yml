@@ -1,7 +1,8 @@
 name: self hosted workflow
 
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: "*/1 * * * *"
 
 jobs:
   pre-build:
