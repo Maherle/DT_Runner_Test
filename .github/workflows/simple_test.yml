@@ -2,7 +2,7 @@ name: self hosted workflow
 
 on:
   schedule:
-    - cron: "*/1 * * * *"
+    - cron: "*/5 * * * *"
 
 jobs:
   pre-build:
