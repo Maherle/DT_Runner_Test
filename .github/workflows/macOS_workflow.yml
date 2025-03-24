@@ -9,7 +9,7 @@ jobs:
     runs-on:
       - self-hosted
       - DT
-      - linux
+      # - linux
     steps:
       - uses: actions/checkout@v2
 
