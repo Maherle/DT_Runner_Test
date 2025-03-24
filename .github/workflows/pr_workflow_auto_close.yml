@@ -5,7 +5,7 @@ on:
     # branches: [test_branch]
     types:
       - opened
-      - reopened
+      # - reopened
       - synchronize
       
 permissions:
