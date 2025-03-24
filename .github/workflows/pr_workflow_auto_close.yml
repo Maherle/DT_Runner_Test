@@ -2,7 +2,7 @@ name: PR Workflow with Auto-Close
 
 on:
   pull_request:
-    branches: [test_branch]
+    # branches: [test_branch]
     types:
       - opened
       - reopened
