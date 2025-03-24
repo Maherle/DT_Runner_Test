@@ -1,0 +1,52 @@
+name: self hosted workflow
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  pre-build:
+    runs-on:
+      - self-hosted
+      - DT
+      - linux
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run a one-line script
+        run: |
+          echo this is the pre build!
+          sleep 15
+          echo Goodbye!
+  build:
+    needs: pre-build
+    
+    runs-on:
+      - self-hosted
+      # - macOS
+      - DT
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run a one-line script
+        run: |
+          echo this is the build!
+          sleep 15
+          echo Ok!
+
+  post-build:
+    needs: build
+    
+    runs-on:
+      - self-hosted
+      - DT
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run a one-line script
+        run: |
+          echo this is the post-build!
+          sleep 15
+          echo we are done!
+
+     
