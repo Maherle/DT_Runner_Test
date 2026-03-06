@@ -19,6 +19,9 @@ on:
         
 jobs:
   pre-build:
+    env:
+      LEVEL: "test"
+      TAGS: "tagtest = true"
     runs-on:
       - ubuntu-latest
     steps:
