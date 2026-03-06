@@ -20,7 +20,7 @@ on:
 jobs:
   pre-build:
     env:
-      LEVEL: "test"
+      LEVEL: "pre"
       TAGS: "tagtest = true"
     runs-on:
       - ubuntu-latest
@@ -33,6 +33,10 @@ jobs:
           sleep 15
           echo Goodbye!
   build:
+    env:
+      LEVEL: "during"
+      TAGS: "tagtest = true"
+      
     needs: pre-build
     
     runs-on:
@@ -47,6 +51,9 @@ jobs:
           echo Ok!
 
   post-build:
+    env:
+      LEVEL: "post"
+      TAGS: "tagtest = true"
     needs: build
     
     runs-on:
